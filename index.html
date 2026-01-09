@@ -4,52 +4,52 @@
   <meta charset="UTF-8" />
   <title>For Ayisha</title>
 
-  <!-- Luxury Serif Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
+  <!-- Quiet Luxury Serif -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:opsz,wght@8..144,300;400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
 
-<!-- PASSWORD GLASS -->
-<div id="lockScreen" class="glass center">
-  <h1 class="headline">Enter the Magic Word</h1>
-  <input type="password" id="password" placeholder="•••••••" />
-  <button onclick="unlock()">Unlock</button>
-</div>
+<!-- LOCK (HIDDEN NAV) -->
+<section id="lock" class="glass layer center">
+  <h1 class="headline">This is only for you</h1>
+  <input type="password" id="password" placeholder="Enter her name" />
+  <button onclick="unlock()">Enter</button>
+</section>
 
-<!-- MAIN CONTENT -->
-<div id="mainContent" class="hidden">
+<!-- EXPERIENCE -->
+<section id="experience" class="hidden">
 
   <audio id="bgMusic" loop>
     <source src="assets/music/love.mp3" type="audio/mp3">
   </audio>
 
+  <!-- DEPTH LAYERS -->
+  <div class="layer background"></div>
+
   <!-- BENTO GRID -->
   <div class="bento">
 
-    <!-- IMAGE ORBIT -->
     <div class="glass cell orbit">
-      <img src="assets/images/img1.jpg" />
-      <img src="assets/images/img2.jpg" />
-      <img src="assets/images/img3.jpg" />
-      <img src="assets/images/img4.jpg" />
+      <img src="assets/images/img1.jpg">
+      <img src="assets/images/img2.jpg">
+      <img src="assets/images/img3.jpg">
+      <img src="assets/images/img4.jpg">
     </div>
 
-    <!-- TEXT -->
     <div class="glass cell text">
       <h1 class="headline">Ayisha</h1>
       <p id="type"></p>
     </div>
 
-    <!-- CTA -->
     <div class="glass cell action">
-      <button onclick="goYes()">YES 💍</button>
+      <button onclick="goYes()">YES</button>
     </div>
 
   </div>
-</div>
+</section>
 
 <script src="js/main.js"></script>
 </body>
