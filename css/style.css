@@ -1,252 +1,122 @@
 :root {
   --bg: #0b0b0d;
-  --bg-soft: #141417;
-
-  --glass: rgba(255,255,255,0.06);
-  --glass-strong: rgba(255,255,255,0.09);
-  --border: rgba(255,255,255,0.14);
-
+  --glass: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.18);
   --gold: #e6d3a3;
-  --gold-soft: rgba(230,211,163,0.6);
-
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-slow: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-}
-
 body {
   margin: 0;
+  height: 100vh;
   font-family: 'Playfair Display', serif;
-  background:
-    radial-gradient(circle at top, #1b1b1f, var(--bg)),
-    linear-gradient(180deg, transparent, rgba(0,0,0,0.6));
+  background: radial-gradient(circle at top, #1a1a1a, var(--bg));
   color: var(--gold);
-  overflow: hidden;
-  position: relative;
 }
 
-/* =========================
-   PHYSICAL DEPTH LAYERS
-========================= */
-
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,0.02),
-      rgba(255,255,255,0.02) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-  opacity: 0.12;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* =========================
-   GLASSMORPHISM 2.0
-========================= */
-
+/* GLASS */
 .glass {
-  position: relative;
-  background: linear-gradient(
-    180deg,
-    var(--glass-strong),
-    var(--glass)
-  );
-  backdrop-filter: blur(32px) saturate(120%);
-  -webkit-backdrop-filter: blur(32px) saturate(120%);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
   border: 1px solid var(--border);
-  border-radius: 26px;
-
-  box-shadow:
-    0 40px 80px rgba(0,0,0,0.65),
-    inset 0 1px 0 rgba(255,255,255,0.12);
-
-  transform-style: preserve-3d;
-  transition:
-    transform 1.6s var(--ease-slow),
-    box-shadow 1.6s var(--ease-slow);
+  border-radius: 22px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.6);
 }
 
-.glass:hover {
-  transform: translateY(-6px) translateZ(12px);
-  box-shadow:
-    0 60px 120px rgba(0,0,0,0.75),
-    inset 0 1px 0 rgba(255,255,255,0.18);
-}
-
-/* =========================
-   TYPOGRAPHY — QUIET LUXURY
-========================= */
-
-.headline {
-  font-size: 64px;
-  letter-spacing: 0.14em;
-  font-weight: 300;
-  line-height: 1.2;
-  color: var(--gold);
-}
-
-/* =========================
-   LOCK (HIDDEN NAV)
-========================= */
-
-.center {
+/* LOCK */
+#lock {
   position: fixed;
   inset: 0;
   display: flex;
-  flex-direction: column;
-  gap: 26px;
-  align-items: center;
   justify-content: center;
-  z-index: 5;
+  align-items: center;
 }
 
-/* =========================
-   INPUT — TACTILE
-========================= */
+.box {
+  padding: 40px;
+  text-align: center;
+}
 
 input {
-  padding: 14px 16px;
-  width: 240px;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 14px;
-  color: white;
+  margin-top: 20px;
+  padding: 12px;
+  width: 220px;
+  border-radius: 12px;
+  border: none;
   text-align: center;
-  font-size: 16px;
-  transition:
-    border 0.6s var(--ease),
-    background 0.6s var(--ease);
 }
-
-input:focus {
-  outline: none;
-  background: rgba(255,255,255,0.18);
-  border-color: var(--gold-soft);
-}
-
-/* =========================
-   BUTTON — WEIGHTED MOTION
-========================= */
 
 button {
-  padding: 14px 44px;
-  border-radius: 32px;
+  margin-top: 20px;
+  padding: 12px 40px;
+  border-radius: 30px;
   border: none;
-  background:
-    linear-gradient(135deg, #d8c18a, #f3e6c2);
-  color: #111;
-  font-size: 18px;
+  background: linear-gradient(135deg, #d8c18a, #f3e6c2);
   cursor: pointer;
-  transition:
-    transform 1.4s var(--ease-slow),
-    box-shadow 1.4s var(--ease-slow);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-button:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.55);
-}
-
-/* =========================
-   BENTO GRID
-========================= */
-
-.bento {
-  position: relative;
-  z-index: 3;
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 36px;
-  padding: 56px;
-  height: 100%;
-}
-
-.cell {
-  padding: 36px;
-}
-
-/* =========================
-   ORBIT — CHOREOGRAPHED
-========================= */
-
-.orbit {
-  position: relative;
-  perspective: 1200px;
-}
-
-.orbit img {
-  position: absolute;
-  width: 150px;
-  height: 220px;
-  border-radius: 18px;
-  object-fit: cover;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-  animation: orbit 48s var(--ease-slow) infinite;
-  backface-visibility: hidden;
-}
-
-.orbit img:nth-child(1) { animation-delay: 0s; }
-.orbit img:nth-child(2) { animation-delay: 12s; }
-.orbit img:nth-child(3) { animation-delay: 24s; }
-.orbit img:nth-child(4) { animation-delay: 36s; }
-
-@keyframes orbit {
-  from {
-    transform: rotateY(0deg) translateZ(200px);
-  }
-  to {
-    transform: rotateY(360deg) translateZ(200px);
-  }
-}
-
-/* =========================
-   TEXT
-========================= */
-
-.text p {
-  font-size: 22px;
-  line-height: 1.7;
-  opacity: 0.85;
-}
-
-/* =========================
-   ACTION
-========================= */
-
-.action {
-  grid-column: span 2;
-  text-align: center;
-}
-
-/* =========================
-   VISIBILITY
-========================= */
-
+/* MAIN */
 .hidden {
   display: none;
 }
 
-/* =========================
-   ACCESSIBILITY — LUXURY IS CALM
-========================= */
+#app {
+  height: 100%;
+}
 
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-  }
+/* BENTO */
+.bento {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 40px;
+  height: 100%;
+}
+
+/* CARDS */
+.card {
+  padding: 30px;
+}
+
+/* IMAGES */
+.images {
+  display: flex;
+  gap: 16px;
+}
+
+.images img {
+  width: 100%;
+  max-width: 140px;
+  border-radius: 14px;
+  object-fit: cover;
+  animation: float 10s ease-in-out infinite;
+}
+
+.images img:nth-child(2) { animation-delay: 2s; }
+.images img:nth-child(3) { animation-delay: 4s; }
+.images img:nth-child(4) { animation-delay: 6s; }
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* TEXT */
+.text h1 {
+  font-size: 56px;
+  letter-spacing: .12em;
+}
+
+.text p {
+  font-size: 22px;
+  margin-top: 20px;
+}
+
+/* ACTION */
+.action {
+  grid-column: span 2;
+  text-align: center;
 }
