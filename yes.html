@@ -10,14 +10,14 @@
       color: #e6d3a3;
       font-family: 'Playfair Display', serif;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100vh;
       text-align: center;
     }
     h1 {
       font-size: 72px;
-      letter-spacing: .12em;
+      letter-spacing: 0.14em;
     }
   </style>
 </head>
@@ -29,11 +29,11 @@
 <script>
 setInterval(() => {
   confetti({
-    particleCount: 200,
-    spread: 120,
-    origin: { y: 0.6 }
+    particleCount: 120,
+    spread: 80,
+    gravity: 0.6
   });
-}, 1200);
+}, 1600);
 </script>
 
 </body>
