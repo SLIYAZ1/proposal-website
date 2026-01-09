@@ -1,46 +1,85 @@
-
 :root {
   --bg: #0b0b0d;
+  --bg-soft: #161618;
+
   --glass: rgba(255,255,255,0.08);
+  --glass-fallback: rgba(40,40,42,0.9);
   --border: rgba(255,255,255,0.18);
+
   --gold: #e6d3a3;
+  --gold-soft: rgba(230,211,163,0.6);
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-slow: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* RESET */
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  height: 100vh;
-  font-family: 'Playfair Display', serif;
-  background: radial-gradient(circle at top, #1a1a1a, var(--bg));
-  color: var(--gold);
+html, body {
+  height: 100%;
 }
 
-/* GLASS */
+/* BASE */
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background:
+    radial-gradient(circle at top, #1a1a1d, var(--bg));
+  color: var(--gold);
+  overflow: hidden;
+}
+
+/* -------------------------
+   GLASSMORPHISM 2.0 (SAFE)
+------------------------- */
 .glass {
   background: var(--glass);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: 22px;
-  box-shadow: 0 30px 60px rgba(0,0,0,.6);
+
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.6);
+
+  transition:
+    transform 1.4s var(--ease-slow),
+    box-shadow 1.4s var(--ease-slow),
+    opacity 1.2s var(--ease);
 }
 
-/* LOCK */
+/* Fallback if blur unsupported */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass {
+    background: var(--glass-fallback);
+  }
+}
+
+/* -------------------------
+   LOCK SCREEN
+------------------------- */
 #lock {
   position: fixed;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 .box {
-  padding: 40px;
+  padding: 42px;
   text-align: center;
+  opacity: 0;
+  animation: fadeIn 1.6s var(--ease) forwards;
 }
 
+/* -------------------------
+   INPUT + BUTTON
+------------------------- */
 input {
   margin-top: 20px;
   padding: 12px;
@@ -48,76 +87,121 @@ input {
   border-radius: 12px;
   border: none;
   text-align: center;
+  background: rgba(255,255,255,0.12);
+  color: white;
 }
 
 button {
-  margin-top: 20px;
-  padding: 12px 40px;
+  margin-top: 22px;
+  padding: 12px 42px;
   border-radius: 30px;
   border: none;
   background: linear-gradient(135deg, #d8c18a, #f3e6c2);
   cursor: pointer;
+  transition: transform 1.2s var(--ease);
 }
 
-/* MAIN */
+button:hover {
+  transform: translateY(-3px);
+}
+
+/* -------------------------
+   MAIN APP
+------------------------- */
 .hidden {
   display: none;
 }
 
 #app {
   height: 100%;
+  opacity: 0;
+  animation: fadeIn 1.8s var(--ease) forwards;
 }
 
-/* BENTO */
+/* -------------------------
+   BENTO GRID (APPLE STYLE)
+------------------------- */
 .bento {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  padding: 40px;
+  grid-template-columns: 1.2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 32px;
+  padding: 48px;
   height: 100%;
 }
 
-/* CARDS */
+/* CELLS */
 .card {
-  padding: 30px;
+  padding: 34px;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: riseIn 1.8s var(--ease-slow) forwards;
 }
 
-/* IMAGES */
+.card:nth-child(1) { animation-delay: 0.2s; }
+.card:nth-child(2) { animation-delay: 0.4s; }
+.card:nth-child(3) { animation-delay: 0.6s; }
+
+/* -------------------------
+   IMAGES (FLOATING DEPTH)
+------------------------- */
 .images {
   display: flex;
-  gap: 16px;
+  gap: 18px;
 }
 
 .images img {
   width: 100%;
   max-width: 140px;
-  border-radius: 14px;
+  height: 200px;
+  border-radius: 16px;
   object-fit: cover;
-  animation: float 10s ease-in-out infinite;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.55);
+  animation: float 12s ease-in-out infinite;
 }
 
 .images img:nth-child(2) { animation-delay: 2s; }
 .images img:nth-child(3) { animation-delay: 4s; }
 .images img:nth-child(4) { animation-delay: 6s; }
 
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* TEXT */
+/* -------------------------
+   TEXT
+------------------------- */
 .text h1 {
   font-size: 56px;
-  letter-spacing: .12em;
+  letter-spacing: 0.14em;
 }
 
 .text p {
   font-size: 22px;
-  margin-top: 20px;
+  line-height: 1.7;
+  opacity: 0.85;
+  margin-top: 18px;
 }
 
-/* ACTION */
+/* -------------------------
+   ACTION
+------------------------- */
 .action {
   grid-column: span 2;
   text-align: center;
+}
+
+/* -------------------------
+   ANIMATIONS
+------------------------- */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes riseIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
