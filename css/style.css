@@ -1,66 +1,79 @@
 :root {
   --bg: #0b0b0d;
-  --bg-soft: #161618;
-
   --glass: rgba(255,255,255,0.08);
-  --glass-fallback: rgba(40,40,42,0.9);
+  --glass-fallback: rgba(30,30,32,0.9);
   --border: rgba(255,255,255,0.18);
-
   --gold: #e6d3a3;
-  --gold-soft: rgba(230,211,163,0.6);
-
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-slow: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* RESET */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html, body {
-  height: 100%;
-}
-
-/* BASE */
 body {
   margin: 0;
+  height: 100vh;
   font-family: 'Playfair Display', serif;
-  background:
-    radial-gradient(circle at top, #1a1a1d, var(--bg));
+  background: radial-gradient(circle at top, #1a1a1a, var(--bg));
   color: var(--gold);
   overflow: hidden;
 }
 
-/* -------------------------
-   GLASSMORPHISM 2.0 (SAFE)
-------------------------- */
+/* =====================
+   GLASS BASE
+===================== */
 .glass {
+  position: relative;
   background: var(--glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border);
-  border-radius: 22px;
-
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.6);
-
-  transition:
-    transform 1.4s var(--ease-slow),
-    box-shadow 1.4s var(--ease-slow),
-    opacity 1.2s var(--ease);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.6);
+  overflow: hidden;
 }
 
-/* Fallback if blur unsupported */
+/* Fallback */
 @supports not (backdrop-filter: blur(1px)) {
-  .glass {
-    background: var(--glass-fallback);
-  }
+  .glass { background: var(--glass-fallback); }
 }
 
-/* -------------------------
+/* =====================
+   GLASS REFLECTION
+===================== */
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.35),
+    rgba(255,255,255,0.05) 40%,
+    transparent 60%
+  );
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.22),
+    transparent 60%
+  );
+  transform: translateX(-60%) translateY(-60%);
+  animation: glassSweep 14s var(--ease-slow) infinite;
+  pointer-events: none;
+}
+
+/* =====================
    LOCK SCREEN
-------------------------- */
+===================== */
 #lock {
   position: fixed;
   inset: 0;
@@ -71,15 +84,22 @@ body {
 }
 
 .box {
-  padding: 42px;
+  padding: 44px;
   text-align: center;
-  opacity: 0;
-  animation: fadeIn 1.6s var(--ease) forwards;
 }
 
-/* -------------------------
+/* =====================
+   TYPOGRAPHY
+===================== */
+.headline {
+  font-size: 56px;
+  letter-spacing: 0.14em;
+  font-weight: 300;
+}
+
+/* =====================
    INPUT + BUTTON
-------------------------- */
+===================== */
 input {
   margin-top: 20px;
   padding: 12px;
@@ -105,103 +125,28 @@ button:hover {
   transform: translateY(-3px);
 }
 
-/* -------------------------
+/* =====================
    MAIN APP
-------------------------- */
-.hidden {
-  display: none;
-}
+===================== */
+.hidden { display: none; }
 
 #app {
   height: 100%;
-  opacity: 0;
-  animation: fadeIn 1.8s var(--ease) forwards;
 }
 
-/* -------------------------
-   BENTO GRID (APPLE STYLE)
-------------------------- */
+/* =====================
+   BENTO GRID
+===================== */
 .bento {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  grid-template-rows: auto auto;
   gap: 32px;
   padding: 48px;
   height: 100%;
 }
 
-/* CELLS */
+/* =====================
+   CARDS
+===================== */
 .card {
-  padding: 34px;
-  transform: translateY(20px);
-  opacity: 0;
-  animation: riseIn 1.8s var(--ease-slow) forwards;
-}
-
-.card:nth-child(1) { animation-delay: 0.2s; }
-.card:nth-child(2) { animation-delay: 0.4s; }
-.card:nth-child(3) { animation-delay: 0.6s; }
-
-/* -------------------------
-   IMAGES (FLOATING DEPTH)
-------------------------- */
-.images {
-  display: flex;
-  gap: 18px;
-}
-
-.images img {
-  width: 100%;
-  max-width: 140px;
-  height: 200px;
-  border-radius: 16px;
-  object-fit: cover;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.55);
-  animation: float 12s ease-in-out infinite;
-}
-
-.images img:nth-child(2) { animation-delay: 2s; }
-.images img:nth-child(3) { animation-delay: 4s; }
-.images img:nth-child(4) { animation-delay: 6s; }
-
-/* -------------------------
-   TEXT
-------------------------- */
-.text h1 {
-  font-size: 56px;
-  letter-spacing: 0.14em;
-}
-
-.text p {
-  font-size: 22px;
-  line-height: 1.7;
-  opacity: 0.85;
-  margin-top: 18px;
-}
-
-/* -------------------------
-   ACTION
-------------------------- */
-.action {
-  grid-column: span 2;
-  text-align: center;
-}
-
-/* -------------------------
-   ANIMATIONS
-------------------------- */
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-@keyframes riseIn {
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
+  paddi
