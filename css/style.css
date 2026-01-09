@@ -1,45 +1,45 @@
 body {
   margin: 0;
   overflow: hidden;
-  background: black;
   font-family: 'Great Vibes', cursive;
+  background: radial-gradient(circle, #120012, #000);
 }
 
-/* Slideshow */
-.slideshow {
+/* LOCK SCREEN */
+#lockScreen {
   position: fixed;
   inset: 0;
-  z-index: -2;
+  background: radial-gradient(circle, #1a001a, #000);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 
-.slide {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 2.5s ease-in-out;
-  animation: zoom 14s linear infinite;
+#lockScreen input {
+  padding: 12px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+  margin: 15px;
 }
 
-.slide.active {
-  opacity: 0.45;
+#lockScreen button {
+  padding: 10px 30px;
+  font-size: 20px;
+  border-radius: 30px;
+  background: hotpink;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
-/* Zoom animation */
-@keyframes zoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.08); }
+.hidden {
+  display: none;
 }
 
-/* Three canvas */
-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-}
-
-/* Content */
+/* CONTENT */
 .content {
   position: absolute;
   top: 50%;
@@ -47,30 +47,25 @@ canvas {
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
+  z-index: 10;
 }
 
 .title {
   font-size: 70px;
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px pink; }
-  to { text-shadow: 0 0 35px hotpink; }
+  text-shadow: 0 0 30px hotpink;
 }
 
 #typewriter {
   font-size: 28px;
-  margin: 20px 0;
+  margin: 20px;
 }
 
 #yesBtn {
   padding: 15px 45px;
   font-size: 26px;
+  border-radius: 50px;
   background: linear-gradient(45deg, hotpink, red);
   border: none;
-  border-radius: 50px;
   color: white;
   cursor: pointer;
-  box-shadow: 0 0 20px pink;
 }
