@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>For Ayisha</title>
 
-  <!-- Quiet Luxury Serif -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:opsz,wght@8..144,300;400&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<!-- LOCK (HIDDEN NAV) -->
-<section id="lock" class="glass layer center">
-  <h1 class="headline">This is only for you</h1>
-  <input type="password" id="password" placeholder="Enter her name" />
-  <button onclick="unlock()">Enter</button>
-</section>
+<!-- LOCK SCREEN -->
+<div id="lock">
+  <div class="glass box">
+    <h1>Only for you</h1>
+    <input id="password" type="password" placeholder="Enter name">
+    <button onclick="unlock()">Enter</button>
+  </div>
+</div>
 
-<!-- EXPERIENCE -->
-<section id="experience" class="hidden">
+<!-- MAIN UI -->
+<div id="app" class="hidden">
 
   <audio id="bgMusic" loop>
     <source src="assets/music/love.mp3" type="audio/mp3">
   </audio>
 
-  <!-- DEPTH LAYERS -->
-  <div class="layer background"></div>
-
-  <!-- BENTO GRID -->
   <div class="bento">
 
-    <div class="glass cell orbit">
+    <!-- IMAGES -->
+    <div class="glass card images">
       <img src="assets/images/img1.jpg">
       <img src="assets/images/img2.jpg">
       <img src="assets/images/img3.jpg">
       <img src="assets/images/img4.jpg">
     </div>
 
-    <div class="glass cell text">
-      <h1 class="headline">Ayisha</h1>
+    <!-- TEXT -->
+    <div class="glass card text">
+      <h1>Ayisha</h1>
       <p id="type"></p>
     </div>
 
-    <div class="glass cell action">
+    <!-- ACTION -->
+    <div class="glass card action">
       <button onclick="goYes()">YES</button>
     </div>
 
   </div>
-</section>
+</div>
 
 <script src="js/main.js"></script>
 </body>
