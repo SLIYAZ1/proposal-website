@@ -50,3 +50,12 @@ function animate() {
   renderer.render(scene, camera);
 }
 animate();
+
+
+loader.load(
+  `assets/images/${img}`,
+  () => console.log(`${img} loaded`),
+  undefined,
+  () => console.error(`${img} failed to load`)
+);
+
