@@ -1,8 +1,7 @@
 const name = "Ayisha";
 
-/* Time-based personalization */
 const hour = new Date().getHours();
-let greeting =
+const greeting =
   hour < 12 ? "Good morning" :
   hour < 18 ? "Good afternoon" :
   "Good evening";
@@ -28,10 +27,7 @@ function unlock() {
   if (pwd === name) {
     document.getElementById("lock").style.display = "none";
     document.getElementById("app").classList.remove("hidden");
-
-    const music = document.getElementById("bgMusic");
-    if (music) music.play();
-
+    document.getElementById("bgMusic").play();
     setTimeout(typeText, 600);
   } else {
     alert("Not yet 💔");
