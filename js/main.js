@@ -1,24 +1,37 @@
+const name = "Ayisha";
+const hour = new Date().getHours();
+
+let greeting =
+  hour < 12 ? "Good morning" :
+  hour < 18 ? "Good afternoon" :
+  "Good evening";
+
 const text =
-  "From the moment you entered my life, everything became softer, calmer, and more beautiful.";
+  `${greeting}, ${name}.
+From the moment you entered my life,
+everything slowed down —
+and somehow became clearer.`;
+
 let i = 0;
 
 function type() {
   if (i < text.length) {
     document.getElementById("type").innerHTML += text.charAt(i);
     i++;
-    setTimeout(type, 60);
+    setTimeout(type, 70);
   }
 }
 
 function unlock() {
   const pwd = document.getElementById("password").value;
-  if (pwd === "Ayisha") {
-    document.getElementById("lockScreen").style.display = "none";
-    document.getElementById("mainContent").classList.remove("hidden");
-    document.getElementById("bgMusic").play();
-    type();
-  } else {
-    alert("Not yet 💔");
+  if (pwd === name) {
+    document.getElementById("lock").style.opacity = 0;
+    setTimeout(() => {
+      document.getElementById("lock").style.display = "none";
+      document.getElementById("experience").classList.remove("hidden");
+      document.getElementById("bgMusic").play();
+      type();
+    }, 1200);
   }
 }
 
