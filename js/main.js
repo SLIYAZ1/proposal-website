@@ -1,16 +1,7 @@
 const name = "Ayisha";
 
-const hour = new Date().getHours();
-const greeting =
-  hour < 12 ? "Good morning" :
-  hour < 18 ? "Good afternoon" :
-  "Good evening";
-
 const message =
-`${greeting}, ${name}.
-From the moment you entered my life,
-everything slowed down —
-and began to feel right.`;
+"From the moment you entered my life, everything slowed down — and began to feel right.";
 
 let i = 0;
 
@@ -18,9 +9,13 @@ function typeText() {
   if (i < message.length) {
     document.getElementById("type").innerHTML += message.charAt(i);
     i++;
-    setTimeout(typeText, 65);
+    setTimeout(typeText, 70);
   }
 }
+
+document.getElementById("password").addEventListener("keydown", e => {
+  if (e.key === "Enter") unlock();
+});
 
 function unlock() {
   const pwd = document.getElementById("password").value;
@@ -28,9 +23,7 @@ function unlock() {
     document.getElementById("lock").style.display = "none";
     document.getElementById("app").classList.remove("hidden");
     document.getElementById("bgMusic").play();
-    setTimeout(typeText, 600);
-  } else {
-    alert("Not yet 💔");
+    typeText();
   }
 }
 
