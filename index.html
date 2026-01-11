@@ -4,51 +4,48 @@
   <meta charset="UTF-8">
   <title>For Ayisha</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
+  <!-- Editorial Serif -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<!-- LOCK SCREEN -->
-<div id="lock">
-  <div class="glass box">
-    <h1 class="headline">Only for you</h1>
+<!-- PASSWORD SCREEN -->
+<section id="lock">
+  <div class="lock-inner">
+    <h1>For You</h1>
     <input id="password" type="password" placeholder="Enter her name">
-    <button onclick="unlock()">Enter</button>
   </div>
-</div>
+</section>
 
-<!-- MAIN APP -->
-<div id="app" class="hidden">
+<!-- MAIN CONTENT -->
+<main id="app" class="hidden">
 
   <audio id="bgMusic" loop>
     <source src="assets/music/love.mp3" type="audio/mp3">
   </audio>
 
-  <div class="bento">
+  <!-- IMAGE GRID -->
+  <section class="image-grid">
+    <img src="assets/images/img1.jpg" alt="">
+    <img src="assets/images/img2.jpg" alt="">
+    <img src="assets/images/img3.jpg" alt="">
+    <img src="assets/images/img4.jpg" alt="">
+  </section>
 
-    <!-- IMAGES -->
-    <div class="glass card images">
-      <img src="assets/images/img1.jpg">
-      <img src="assets/images/img2.jpg">
-      <img src="assets/images/img3.jpg">
-      <img src="assets/images/img4.jpg">
-    </div>
+  <!-- TEXT -->
+  <section class="content">
+    <h1>Ayisha</h1>
+    <p id="type"></p>
+  </section>
 
-    <!-- TEXT -->
-    <div class="glass card text">
-      <h1 class="headline">Ayisha</h1>
-      <p id="type"></p>
-    </div>
+  <!-- CTA -->
+  <section class="cta">
+    <button onclick="goYes()">YES</button>
+  </section>
 
-    <!-- ACTION -->
-    <div class="glass card action">
-      <button onclick="goYes()">YES</button>
-    </div>
-
-  </div>
-</div>
+</main>
 
 <script src="js/main.js"></script>
 </body>
